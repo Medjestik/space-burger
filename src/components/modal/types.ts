@@ -3,7 +3,7 @@ import type { IIngredient } from '../main/types';
 
 import PropTypes from 'prop-types';
 
-export interface IPopupProps extends PropsWithChildren {
+export interface IModalProps extends PropsWithChildren {
 	isOpen: boolean;
 	onClose: () => void;
 	title?: string;
@@ -11,15 +11,23 @@ export interface IPopupProps extends PropsWithChildren {
 	closeByPressEsc?: boolean;
 }
 
-export interface IDetailIngredientPopupProps extends IPopupProps {
+export interface IModalOverlayProps {
+	onClick: () => void;
+}
+
+export interface IDetailIngredientModalProps extends IModalProps {
 	ingredient?: IIngredient;
 }
 
-export const popupPropTypes = {
+export const modalPropTypes = {
 	isOpen: PropTypes.bool.isRequired,
 	onClose: PropTypes.func.isRequired,
 	title: PropTypes.string,
 	closeByClickOutside: PropTypes.bool,
 	closeByPressEsc: PropTypes.bool,
 	children: PropTypes.node,
+};
+
+export const modalOverlayPropTypes = {
+	onClick: PropTypes.func.isRequired,
 };

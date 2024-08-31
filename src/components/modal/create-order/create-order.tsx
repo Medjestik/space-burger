@@ -1,15 +1,15 @@
 import type { FC } from 'react';
-import { type IPopupProps, popupPropTypes } from '../types';
+import { type IModalProps, modalPropTypes } from '../types';
 
 import image from '../../../images/order-done.svg';
 
-import Popup from '../popup';
+import Modal from '../modal';
 
 import styles from './create-order.module.scss';
 
-const CreateOrderPopup: FC<IPopupProps> = (props) => {
+const CreateOrderModal: FC<IModalProps> = (props) => {
 	return (
-		<Popup {...props}>
+		<Modal {...props}>
 			<h4 className='text text_type_digits-large'>034536</h4>
 			<p className='text text_type_main-medium mt-8'>идентификатор заказа</p>
 			<img className={`${styles.image} mt-15`} src={image} alt='иконка'></img>
@@ -19,10 +19,10 @@ const CreateOrderPopup: FC<IPopupProps> = (props) => {
 			<p className='text text_type_main-small text_color_inactive mt-2'>
 				Дождитесь готовности на орбитальной станции
 			</p>
-		</Popup>
+		</Modal>
 	);
 };
 
-CreateOrderPopup.propTypes = popupPropTypes;
+CreateOrderModal.propTypes = modalPropTypes;
 
-export default CreateOrderPopup;
+export default CreateOrderModal;

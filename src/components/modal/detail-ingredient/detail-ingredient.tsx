@@ -1,14 +1,14 @@
 import type { FC } from 'react';
-import { type IDetailIngredientPopupProps, popupPropTypes } from '../types';
+import { type IDetailIngredientModalProps, modalPropTypes } from '../types';
 import { ingredientPropTypes } from '../../main/types';
 
 import { useMemo } from 'react';
 
-import Popup from '../popup';
+import Modal from '../modal';
 
 import styles from './detail-ingredient.module.scss';
 
-const DetailIngredientPopup: FC<IDetailIngredientPopupProps> = ({
+const DetailIngredientModal: FC<IDetailIngredientModalProps> = ({
 	ingredient,
 	...props
 }) => {
@@ -35,7 +35,7 @@ const DetailIngredientPopup: FC<IDetailIngredientPopupProps> = ({
 	}, [ingredient]);
 
 	return (
-		<Popup {...props}>
+		<Modal {...props}>
 			{ingredient && (
 				<>
 					<img
@@ -49,13 +49,13 @@ const DetailIngredientPopup: FC<IDetailIngredientPopupProps> = ({
 					</ul>
 				</>
 			)}
-		</Popup>
+		</Modal>
 	);
 };
 
-DetailIngredientPopup.propTypes = {
+DetailIngredientModal.propTypes = {
 	ingredient: ingredientPropTypes,
-	...popupPropTypes,
+	...modalPropTypes,
 };
 
-export default DetailIngredientPopup;
+export default DetailIngredientModal;

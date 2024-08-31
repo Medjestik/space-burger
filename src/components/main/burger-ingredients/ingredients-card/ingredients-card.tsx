@@ -17,9 +17,7 @@ const IngredientsCard: FC<IIngredientCardProps> = ({ ingredient, onOpen }) => {
 				alt='изоражение ингридиента'
 			/>
 			<Price count={ingredient.price} />
-			<h6
-				style={{ textAlign: 'center' }}
-				className='text text_type_main-default mt-1'>
+			<h6 className={`${styles.name} text text_type_main-default mt-1`}>
 				{ingredient.name}
 			</h6>
 		</li>

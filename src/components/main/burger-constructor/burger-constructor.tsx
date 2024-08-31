@@ -13,23 +13,23 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import Price from '../../price/price';
-import CreateOrderPopup from '../../popup/create-order/create-order';
+import CreateOrderModal from '../../modal/create-order/create-order';
 
 import styles from './burger-constructor.module.scss';
 
 const BurgerConstructor: FC<IBurgerConstructorProps> = ({ ingredients }) => {
-	const [isOpenCreateOrderPopup, setIsOpenCreateOrderPopup] =
+	const [isOpenCreateOrderModal, setIsOpenCreateOrderModal] =
 		useState<boolean>(false);
 
-	const toggleCreateOrderPopup = useCallback(() => {
-		setIsOpenCreateOrderPopup((prevState) => !prevState);
+	const toggleCreateOrderModal = useCallback(() => {
+		setIsOpenCreateOrderModal((prevState) => !prevState);
 	}, []);
 
 	return (
 		<section className={styles.section}>
 			<div className={styles.container}>
 				<ConstructorElement
-					text={ingredients.bunList[0].name}
+					text={ingredients.bunList[0].name + ' (верх)'}
 					price={ingredients.bunList[0].price}
 					thumbnail={ingredients.bunList[0].image}
 					type='top'
@@ -54,7 +54,7 @@ const BurgerConstructor: FC<IBurgerConstructorProps> = ({ ingredients }) => {
 					))}
 				</ul>
 				<ConstructorElement
-					text={ingredients.bunList[0].name}
+					text={ingredients.bunList[0].name + ' (низ)'}
 					price={ingredients.bunList[0].price}
 					thumbnail={ingredients.bunList[0].image}
 					type='bottom'
@@ -64,7 +64,7 @@ const BurgerConstructor: FC<IBurgerConstructorProps> = ({ ingredients }) => {
 				<div className={`mt-10 ${styles.order}`}>
 					<Price count={600} size='medium' />
 					<Button
-						onClick={toggleCreateOrderPopup}
+						onClick={toggleCreateOrderModal}
 						htmlType='button'
 						type='primary'
 						size='large'
@@ -73,10 +73,10 @@ const BurgerConstructor: FC<IBurgerConstructorProps> = ({ ingredients }) => {
 					</Button>
 				</div>
 			</div>
-			{isOpenCreateOrderPopup && (
-				<CreateOrderPopup
-					isOpen={isOpenCreateOrderPopup}
-					onClose={toggleCreateOrderPopup}
+			{isOpenCreateOrderModal && (
+				<CreateOrderModal
+					isOpen={isOpenCreateOrderModal}
+					onClose={toggleCreateOrderModal}
 				/>
 			)}
 		</section>

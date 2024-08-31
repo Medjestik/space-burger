@@ -8,7 +8,7 @@ import {
 import { useState, useCallback } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientsList from './ingredients-list/ingredients-list';
-import DetailIngredientPopup from '../../popup/detail-ingredient/detail-ingredient';
+import DetailIngredientModal from '../../modal/detail-ingredient/detail-ingredient';
 
 import styles from './burger-ingredients.module.scss';
 
@@ -21,16 +21,16 @@ const tabs = [
 const BurgerIngredients: FC<IBurgerIngredientsProps> = ({ ingredients }) => {
 	const [currentTab, setCurrentTab] = useState<EIngredients>(EIngredients.Bun);
 	const [currentIngredient, setCurrentIngredient] = useState<IIngredient>();
-	const [isOpenDetailIngredientPopup, setIsOpenDetailIngredientPopup] =
+	const [isOpenDetailIngredientModal, setIsOpenDetailIngredientModal] =
 		useState<boolean>(false);
 
-	const openDetailIngredientPopup = useCallback((ingredient: IIngredient) => {
+	const openDetailIngredientModal = useCallback((ingredient: IIngredient) => {
 		setCurrentIngredient(ingredient);
-		setIsOpenDetailIngredientPopup(true);
+		setIsOpenDetailIngredientModal(true);
 	}, []);
 
-	const closeDetailIngredientPopup = useCallback(() => {
-		setIsOpenDetailIngredientPopup(false);
+	const closeDetailIngredientModal = useCallback(() => {
+		setIsOpenDetailIngredientModal(false);
 	}, []);
 
 	return (
@@ -51,23 +51,23 @@ const BurgerIngredients: FC<IBurgerIngredientsProps> = ({ ingredients }) => {
 				<IngredientsList
 					title='Булки'
 					ingredientsList={ingredients.bunList}
-					onOpen={openDetailIngredientPopup}
+					onOpen={openDetailIngredientModal}
 				/>
 				<IngredientsList
 					title='Соусы'
 					ingredientsList={ingredients.sauceList}
-					onOpen={openDetailIngredientPopup}
+					onOpen={openDetailIngredientModal}
 				/>
 				<IngredientsList
 					title='Начинки'
 					ingredientsList={ingredients.mainList}
-					onOpen={openDetailIngredientPopup}
+					onOpen={openDetailIngredientModal}
 				/>
 			</ul>
-			{isOpenDetailIngredientPopup && (
-				<DetailIngredientPopup
-					isOpen={isOpenDetailIngredientPopup}
-					onClose={closeDetailIngredientPopup}
+			{isOpenDetailIngredientModal && (
+				<DetailIngredientModal
+					isOpen={isOpenDetailIngredientModal}
+					onClose={closeDetailIngredientModal}
 					title='Детали ингредиента'
 					ingredient={currentIngredient}
 				/>

@@ -20,7 +20,7 @@ export const App = () => {
 			.then((res: { data: IIngredient[] }) => {
 				setIngredients(res.data);
 			})
-			.catch((err) => console.log(err))
+			.catch(console.error)
 			.finally(() => setIsLoading(false));
 	};
 
@@ -36,7 +36,7 @@ export const App = () => {
 				<>
 					<Header />
 					<Main ingredients={ingredients} />
-					<div id='popup-root'></div>
+					<div id='modal-root'></div>
 				</>
 			)}
 		</div>
