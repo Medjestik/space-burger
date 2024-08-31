@@ -1,0 +1,12 @@
+.card {
+	width: 100%;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+	transition: all .3s ease-in-out;
+}
+.card:hover {
+	cursor: pointer;
+}

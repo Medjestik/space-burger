@@ -1,0 +1,27 @@
+@keyframes spin {
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.preloader {
+  width: 100%;
+	margin: 20vh auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.circle {
+	width:  74px;
+	height: 74px;
+	border: 1px solid var(--interface-input);
+	border-bottom-color: var(--secondary-text);
+	border-radius: 50%;
+  animation: spin .75s infinite linear;
+  margin-bottom: 24px;
+}
+.caption {
+  text-align: center;
+  letter-spacing: 1.4px;
+}

@@ -1,0 +1,22 @@
+.section {
+	width: 100%;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+}
+.tabs {
+	width: 100%;
+	margin: 20px 0 0;
+	display: flex;
+	align-items: center;
+}
+.list {
+	width: 100%;
+	height: calc(100vh - 88px - 80px - 40px - 77px - 40px);
+	margin: 40px 0 0;
+	padding: 0;
+	list-style-type: none;
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+}
