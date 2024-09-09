@@ -1,32 +1,44 @@
-import clsx from 'clsx';
-import { useState } from 'react';
-import s from './app.module.scss';
-import reactLogo from './assets/react.svg';
-import { ReactComponent as TypescriptLogo } from './assets/typescript.svg';
+import type { IIngredient } from '../components/main/types';
+
+import * as api from '../api/api';
+
+import Preloader from '../components/preloader/preloader';
+import Header from '../components/header/header';
+import Main from '../components/main/main';
+import { useEffect, useState } from 'react';
+
+import styles from './app.module.scss';
 
 export const App = () => {
-	// const num = 0
-	const [count, setCount] = useState(0);
+	const [ingredients, setIngredients] = useState<IIngredient[]>([]);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
+
+	const getIngredients = () => {
+		setIsLoading(true);
+		api
+			.getIngredients()
+			.then((res: { data: IIngredient[] }) => {
+				setIngredients(res.data);
+			})
+			.catch(console.error)
+			.finally(() => setIsLoading(false));
+	};
+
+	useEffect(() => {
+		getIngredients();
+	}, []);
+
 	return (
-		<div className='page'>
-			<div className='logo-wrapper'>
-				<a href='https://reactjs.org' target='_blank' rel='noreferrer'>
-					<img
-						src={reactLogo}
-						className={clsx(s.logo, s.react)}
-						alt='React logo'
-					/>
-				</a>
-				<a href='https://vitejs.dev' target='_blank' rel='noreferrer'>
-					<TypescriptLogo className={s.logo} />
-				</a>
-			</div>
-			<h1>React + TS</h1>
-			<div className={s.card}>
-				<button onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</button>
-			</div>
+		<div className={styles.page}>
+			{isLoading ? (
+				<Preloader />
+			) : (
+				<>
+					<Header />
+					<Main ingredients={ingredients} />
+					<div id='modal-root'></div>
+				</>
+			)}
 		</div>
 	);
 };
