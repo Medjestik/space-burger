@@ -22,6 +22,10 @@ export interface IIngredientCardProps {
 	onOpen: (ingredient: IIngredient) => void;
 }
 
+export interface IIngredientDetailProps {
+	ingredient?: IIngredient;
+}
+
 export const burgerIngredientsPropTypes = {
 	ingredients: ingredientsCategoryPropTypes,
 };

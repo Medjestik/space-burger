@@ -8,7 +8,8 @@ import {
 import { useState, useCallback } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientsList from './ingredients-list/ingredients-list';
-import DetailIngredientModal from '../../modal/detail-ingredient/detail-ingredient';
+import Modal from '../../modal/modal';
+import IngredientDetail from './ingredients-detail/ingredients-detail';
 
 import styles from './burger-ingredients.module.scss';
 
@@ -65,12 +66,12 @@ const BurgerIngredients: FC<IBurgerIngredientsProps> = ({ ingredients }) => {
 				/>
 			</ul>
 			{isOpenDetailIngredientModal && (
-				<DetailIngredientModal
+				<Modal
 					isOpen={isOpenDetailIngredientModal}
 					onClose={closeDetailIngredientModal}
-					title='Детали ингредиента'
-					ingredient={currentIngredient}
-				/>
+					title='Детали ингредиента'>
+					<IngredientDetail ingredient={currentIngredient} />
+				</Modal>
 			)}
 		</section>
 	);

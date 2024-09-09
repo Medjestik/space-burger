@@ -13,7 +13,8 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import Price from '../../price/price';
-import CreateOrderModal from '../../modal/create-order/create-order';
+import Modal from '../../modal/modal';
+import ConstructorOrder from './constructor-order/constructor-order';
 
 import styles from './burger-constructor.module.scss';
 
@@ -74,10 +75,9 @@ const BurgerConstructor: FC<IBurgerConstructorProps> = ({ ingredients }) => {
 				</div>
 			</div>
 			{isOpenCreateOrderModal && (
-				<CreateOrderModal
-					isOpen={isOpenCreateOrderModal}
-					onClose={toggleCreateOrderModal}
-				/>
+				<Modal isOpen={isOpenCreateOrderModal} onClose={toggleCreateOrderModal}>
+					<ConstructorOrder />
+				</Modal>
 			)}
 		</section>
 	);

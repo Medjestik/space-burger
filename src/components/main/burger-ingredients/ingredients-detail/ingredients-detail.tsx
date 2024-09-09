@@ -1,17 +1,12 @@
 import type { FC } from 'react';
-import { type IDetailIngredientModalProps, modalPropTypes } from '../types';
-import { ingredientPropTypes } from '../../main/types';
+import type { IIngredientDetailProps } from '../types';
+import { ingredientPropTypes } from '../../types';
 
 import { useMemo } from 'react';
 
-import Modal from '../modal';
+import styles from './ingredients-detail.module.scss';
 
-import styles from './detail-ingredient.module.scss';
-
-const DetailIngredientModal: FC<IDetailIngredientModalProps> = ({
-	ingredient,
-	...props
-}) => {
+const IngredientDetail: FC<IIngredientDetailProps> = ({ ingredient }) => {
 	const renderIngredientIndicator = (name: string, count: number) => {
 		return (
 			<li className={styles.item} key={name}>
@@ -35,27 +30,24 @@ const DetailIngredientModal: FC<IDetailIngredientModalProps> = ({
 	}, [ingredient]);
 
 	return (
-		<Modal {...props}>
-			{ingredient && (
-				<>
-					<img
-						className={styles.image}
-						src={ingredient.image_large}
-						alt='изображение ингредиента'
-					/>
-					<h4 className='text text_type_main-medium mt-4'>{ingredient.name}</h4>
-					<ul className={`${styles.list} mt-8 ml-15 mr-15`}>
-						{ingredientIndicators}
-					</ul>
-				</>
-			)}
-		</Modal>
+		ingredient && (
+			<>
+				<img
+					className={styles.image}
+					src={ingredient.image_large}
+					alt='изображение ингредиента'
+				/>
+				<h4 className='text text_type_main-medium mt-4'>{ingredient.name}</h4>
+				<ul className={`${styles.list} mt-8 ml-15 mr-15`}>
+					{ingredientIndicators}
+				</ul>
+			</>
+		)
 	);
 };
 
-DetailIngredientModal.propTypes = {
+IngredientDetail.propTypes = {
 	ingredient: ingredientPropTypes,
-	...modalPropTypes,
 };
 
-export default DetailIngredientModal;
+export default IngredientDetail;

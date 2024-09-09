@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from 'react';
-import type { IIngredient } from '../main/types';
 
 import PropTypes from 'prop-types';
 
@@ -13,10 +12,6 @@ export interface IModalProps extends PropsWithChildren {
 
 export interface IModalOverlayProps {
 	onClick: () => void;
-}
-
-export interface IDetailIngredientModalProps extends IModalProps {
-	ingredient?: IIngredient;
 }
 
 export const modalPropTypes = {
