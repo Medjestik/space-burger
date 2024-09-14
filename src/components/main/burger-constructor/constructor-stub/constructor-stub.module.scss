@@ -1,0 +1,29 @@
+.stub {
+	margin: 0 0 0 32px;
+	width: calc(100% - 34px);
+	border: 1px solid var(--interface-modal-bg);
+	max-width: 536px;
+	height: 80px;
+	background-color: var(--interface-modal-bg);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	&_bun_top {
+		border-top-left-radius: 40px;
+		border-top-right-radius: 40px;
+		border-bottom-left-radius: 16px;
+		border-bottom-right-radius: 16px;
+	}
+	&_bun_bot {
+		border-top-left-radius: 16px;
+		border-top-right-radius: 16px;
+		border-bottom-left-radius: 40px;
+		border-bottom-right-radius: 40px;
+	}
+	&_ingredient {
+		border-radius: 40px;
+	}
+	&_drag_hover {
+		border: 1px dashed var(--accent-color);
+	}
+}
