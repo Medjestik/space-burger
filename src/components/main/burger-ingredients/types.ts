@@ -1,42 +1,38 @@
+import type { RefObject } from 'react';
+
 import PropTypes from 'prop-types';
 
-import {
-	ingredientPropTypes,
-	ingredientsCategoryPropTypes,
-	type IIngredient,
-	type IIngredientList,
-} from '../types';
-
-export interface IBurgerIngredientsProps {
-	ingredients: IIngredientList;
-}
+import { type IIngredient, ingredientPropTypes, EIngredients } from '../types';
 
 export interface IIngredientsListProps {
 	title: string;
 	ingredientsList: IIngredient[];
-	onOpen: (ingredient: IIngredient) => void;
+	ref?: RefObject<HTMLUListElement>;
 }
 
 export interface IIngredientCardProps {
 	ingredient: IIngredient;
-	onOpen: (ingredient: IIngredient) => void;
 }
 
 export interface IIngredientDetailProps {
 	ingredient?: IIngredient;
 }
 
-export const burgerIngredientsPropTypes = {
-	ingredients: ingredientsCategoryPropTypes,
-};
+export interface IIngredientTabsProps {
+	currentTab: EIngredients;
+	onClick: (tab: EIngredients) => void;
+}
 
 export const ingredientsListPropTypes = {
 	title: PropTypes.string.isRequired,
 	ingredientsList: PropTypes.arrayOf(ingredientPropTypes).isRequired,
-	onOpen: PropTypes.func.isRequired,
 };
 
 export const ingredientCardPropTypes = {
 	ingredient: ingredientPropTypes,
-	onOpen: PropTypes.func.isRequired,
+};
+
+export const ingredientTabsPropTypes = {
+	currentTab: PropTypes.oneOf(Object.values(EIngredients)).isRequired,
+	onClick: PropTypes.func.isRequired,
 };

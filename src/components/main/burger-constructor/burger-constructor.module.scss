@@ -7,8 +7,9 @@
 .container {
 	width: 100%;
 	margin: 60px 0 0;
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	gap: 16px;
+	grid-template-rows: 1fr;
 }
 .list {
 	margin: 0;
@@ -17,14 +18,18 @@
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: 16px;
+	max-height: calc(3 * 80px + 16px + 16px);
+	overflow-y: scroll;
 }
 .item {
 	margin: 0;
 	display: flex;
 	align-items: center;
+	&_dragging {
+		opacity: 0;
+	}
 }
 .order {
-	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;

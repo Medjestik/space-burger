@@ -1,28 +1,36 @@
-import type { FC } from 'react';
+import type { ForwardedRef } from 'react';
 import type { IIngredient } from '../../types';
 import { type IIngredientsListProps, ingredientsListPropTypes } from '../types';
+
+import { forwardRef } from 'react';
 
 import IngredientsCard from '../ingredients-card/ingredients-card';
 
 import styles from './ingredients-list.module.scss';
 
-const IngredientsList: FC<IIngredientsListProps> = ({
-	title,
-	ingredientsList,
-	onOpen,
-}) => {
-	return (
-		<li className={styles.container}>
-			<h4 className='text text_type_main-medium'>{title}</h4>
-			<ul className={styles.list}>
-				{ingredientsList.map((item: IIngredient) => (
-					<IngredientsCard key={item._id} ingredient={item} onOpen={onOpen} />
-				))}
-			</ul>
-		</li>
-	);
-};
+const IngredientsList = forwardRef(
+	(
+		{ title, ingredientsList }: IIngredientsListProps,
+		ref: ForwardedRef<HTMLUListElement>
+	) => {
+		return (
+			<li className={styles.container}>
+				<h4 className='text text_type_main-medium'>{title}</h4>
+				<ul ref={ref} className={styles.list}>
+					{ingredientsList.map((item: IIngredient) => (
+						<IngredientsCard key={item._id} ingredient={item} />
+					))}
+				</ul>
+			</li>
+		);
+	}
+);
 
-IngredientsList.propTypes = ingredientsListPropTypes;
+IngredientsList.displayName = 'IngredientsList';
+
+IngredientsList.propTypes = {
+	title: ingredientsListPropTypes.title,
+	ingredientsList: ingredientsListPropTypes.ingredientsList,
+};
 
 export default IngredientsList;

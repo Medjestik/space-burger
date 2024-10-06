@@ -1,88 +1,145 @@
 import type { FC } from 'react';
-import {
-	type IBurgerConstructorProps,
-	burgerConstructorPropTypes,
-} from './types';
+import type { TRootState } from '../../../services/store';
+import type { IIngredient } from '../types';
 
-import { useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { useDrop } from 'react-dnd';
+import { v4 as uuidv4 } from 'uuid';
 
-import {
-	DragIcon,
-	Button,
-	ConstructorElement,
-} from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import Price from '../../price/price';
 import Modal from '../../modal/modal';
+import ConstructorElementBun from './constructor-element-bun/constructor-element-bun';
+import ConstructorElementIngredient from './constructor-element-ingredient/constructor-element-ingredient';
+import ConstructorStub from './constructor-stub/constructor-stub';
 import ConstructorOrder from './constructor-order/constructor-order';
+
+import {
+	addBun,
+	addIngredient,
+} from '../../../services/burgerConstructor/reducer';
+import { createBurgerOrder } from '../../../services/burgerOrder/actions';
+import { closeCreateOrderModal } from '../../../services/burgerOrder/reducer';
+import {
+	getTotalPrice,
+	getIngredientsId,
+} from '../../../services/burgerConstructor/selectors';
+import { EIngredients } from '../types';
+import { EConstructorStubType, EConstructorElementBunPosition } from './types';
 
 import styles from './burger-constructor.module.scss';
 
-const BurgerConstructor: FC<IBurgerConstructorProps> = ({ ingredients }) => {
-	const [isOpenCreateOrderModal, setIsOpenCreateOrderModal] =
-		useState<boolean>(false);
+const BurgerConstructor: FC = () => {
+	const dispatch = useAppDispatch();
+	const { bun, ingredients } = useSelector(
+		(state: TRootState) => state.burgerConstructor
+	);
+	const { orderData, loading, error } = useSelector(
+		(state: TRootState) => state.burgerOrder
+	);
+	const totalPrice = useSelector(getTotalPrice);
+	const ingredientsId = useSelector(getIngredientsId);
 
-	const toggleCreateOrderModal = useCallback(() => {
-		setIsOpenCreateOrderModal((prevState) => !prevState);
-	}, []);
+	const [{ isHover, dragItem }, dropTarget] = useDrop({
+		accept: 'ingredient',
+		drop(ingredient: IIngredient) {
+			handleDropIngredient(ingredient);
+		},
+		collect: (monitor) => ({
+			isHover: monitor.isOver(),
+			dragItem: monitor.getItem(),
+		}),
+	});
+
+	const handleDropIngredient = (ingredient: IIngredient) => {
+		dispatch(
+			ingredient.type === EIngredients.Bun
+				? addBun(ingredient)
+				: addIngredient({ ...ingredient, uuid: uuidv4() })
+		);
+	};
+
+	const handleCreateOrder = () => {
+		if (ingredientsId && ingredientsId.length > 0) {
+			dispatch(createBurgerOrder({ ingredients: ingredientsId }));
+		}
+	};
+
+	const handleCloseCreateOrderModal = () => {
+		dispatch(closeCreateOrderModal());
+	};
 
 	return (
 		<section className={styles.section}>
-			<div className={styles.container}>
-				<ConstructorElement
-					text={ingredients.bunList[0].name + ' (верх)'}
-					price={ingredients.bunList[0].price}
-					thumbnail={ingredients.bunList[0].image}
-					type='top'
-					isLocked={true}
-					extraClass='ml-8 mb-4'
-				/>
-				<ul className={`${styles.list} custom-scroll scroll`}>
-					{[
-						ingredients.mainList[0],
-						ingredients.sauceList[0],
-						ingredients.mainList[1],
-					].map((item, i) => (
-						<li className={styles.item} key={i}>
-							<DragIcon type='primary' />
-							<ConstructorElement
-								text={item.name}
-								price={item.price}
-								thumbnail={item.image}
-								extraClass='ml-2'
+			<div className={styles.container} ref={dropTarget}>
+				{bun ? (
+					<ConstructorElementBun
+						bun={bun}
+						position={EConstructorElementBunPosition.TOP}
+					/>
+				) : (
+					<ConstructorStub
+						type={EConstructorStubType.BUN_TOP}
+						isHover={isHover && dragItem.type === EIngredients.Bun}
+					/>
+				)}
+
+				{ingredients.length > 0 ? (
+					<ul className={`${styles.list} custom-scroll scroll`}>
+						{ingredients.map((item, index) => (
+							<ConstructorElementIngredient
+								ingredient={item}
+								key={item.uuid}
+								index={index}
 							/>
-						</li>
-					))}
-				</ul>
-				<ConstructorElement
-					text={ingredients.bunList[0].name + ' (низ)'}
-					price={ingredients.bunList[0].price}
-					thumbnail={ingredients.bunList[0].image}
-					type='bottom'
-					isLocked={true}
-					extraClass='ml-8 mt-4'
-				/>
-				<div className={`mt-10 ${styles.order}`}>
-					<Price count={600} size='medium' />
-					<Button
-						onClick={toggleCreateOrderModal}
-						htmlType='button'
-						type='primary'
-						size='large'
-						extraClass='ml-10'>
-						Оформить заказ
-					</Button>
-				</div>
+						))}
+					</ul>
+				) : (
+					<ConstructorStub
+						isHover={isHover && dragItem.type !== EIngredients.Bun}
+					/>
+				)}
+
+				{bun ? (
+					<ConstructorElementBun
+						bun={bun}
+						position={EConstructorElementBunPosition.BOT}
+					/>
+				) : (
+					<ConstructorStub
+						type={EConstructorStubType.BUN_BOT}
+						isHover={isHover && dragItem.type === EIngredients.Bun}
+					/>
+				)}
 			</div>
-			{isOpenCreateOrderModal && (
-				<Modal isOpen={isOpenCreateOrderModal} onClose={toggleCreateOrderModal}>
+			<div className={`mt-10 mr-4 ml-4 ${styles.order}`}>
+				<Price count={totalPrice} size='medium' />
+				<Button
+					onClick={handleCreateOrder}
+					htmlType='button'
+					type='primary'
+					size='large'
+					extraClass='ml-10'
+					disabled={loading}>
+					{loading ? 'Оформление ...' : 'Оформить заказ'}
+				</Button>
+			</div>
+			{error && (
+				<div className='mt-4 mr-4 ml-4'>
+					Ошибка при оформелние заказа, попробуйте позже
+				</div>
+			)}
+			{orderData && (
+				<Modal
+					isOpen={orderData ? true : false}
+					onClose={handleCloseCreateOrderModal}>
 					<ConstructorOrder />
 				</Modal>
 			)}
 		</section>
 	);
 };
-
-BurgerConstructor.propTypes = burgerConstructorPropTypes;
 
 export default BurgerConstructor;

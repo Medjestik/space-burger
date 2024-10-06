@@ -26,11 +26,7 @@ export interface IIngredientList {
 	mainList: IIngredient[];
 }
 
-export interface IMainProps {
-	ingredients: IIngredient[];
-}
-
-export const ingredientPropTypes = PropTypes.shape({
+export const ingredientTypes = {
 	calories: PropTypes.number.isRequired,
 	carbohydrates: PropTypes.number.isRequired,
 	fat: PropTypes.number.isRequired,
@@ -42,14 +38,12 @@ export const ingredientPropTypes = PropTypes.shape({
 	proteins: PropTypes.number.isRequired,
 	type: PropTypes.oneOf(Object.values(EIngredients)).isRequired,
 	_id: PropTypes.string.isRequired,
-}).isRequired;
+};
+
+export const ingredientPropTypes = PropTypes.shape(ingredientTypes).isRequired;
 
 export const ingredientsCategoryPropTypes = PropTypes.shape({
 	bunList: PropTypes.arrayOf(ingredientPropTypes).isRequired,
 	sauceList: PropTypes.arrayOf(ingredientPropTypes).isRequired,
 	mainList: PropTypes.arrayOf(ingredientPropTypes).isRequired,
 }).isRequired;
-
-export const mainPropTypes = {
-	ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
-};
