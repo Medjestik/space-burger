@@ -10,23 +10,27 @@ function handleResponse(res: Response) {
 	}
 }
 
+function request(endpoint: string, options: RequestInit) {
+	return fetch(`${API_URL}${endpoint}`, options).then(handleResponse);
+}
+
 export const getIngredients = () => {
-	return fetch(`${API_URL}/ingredients`, {
+	return request('/ingredients', {
 		method: 'GET',
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
 		},
-	}).then((res) => handleResponse(res));
+	});
 };
 
 export const createOrder = (data: ICreateOrderRequest) => {
-	return fetch(`${API_URL}/orders`, {
+	return request('/orders', {
 		method: 'POST',
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify(data),
-	}).then((res) => handleResponse(res));
+	});
 };
