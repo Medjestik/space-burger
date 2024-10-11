@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import styles from './preloader.module.scss';
 
-const Preloader: FC = () => {
+export const Preloader: FC = () => {
 	return (
 		<figure className={styles.preloader}>
 			<i className={styles.circle}></i>
@@ -13,5 +13,3 @@ const Preloader: FC = () => {
 		</figure>
 	);
 };
-
-export default Preloader;

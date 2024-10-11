@@ -1,8 +1,8 @@
-import type { IIngredient } from '../../components/main/types';
+import type { IIngredient } from '../../pages/home/types';
 import type {
 	IIngredientConstructor,
 	IBurgerConstructor,
-} from '../../components/main/burger-constructor/types';
+} from '../../pages/home/burger-constructor/types';
 
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 

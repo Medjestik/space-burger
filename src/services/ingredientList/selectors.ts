@@ -1,10 +1,15 @@
 import type { TRootState } from '../store';
-import { type IIngredient, EIngredients } from '../../components/main/types';
+import { type IIngredient, EIngredients } from '../../pages/home/types';
 
 import { createSelector } from 'reselect';
 
 const selectIngredientList = (state: TRootState) =>
 	state.ingredientList.ingredientList;
+
+export const getIngredientById = (id: string) =>
+	createSelector([selectIngredientList], (ingredientList: IIngredient[]) =>
+		ingredientList.find((ingredient) => ingredient._id === id)
+	);
 
 export const getCategorizedIngredients = createSelector(
 	[selectIngredientList],

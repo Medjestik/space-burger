@@ -1,5 +1,5 @@
 import type { TRootState } from '../store';
-import type { IIngredient } from '../../components/main/types';
+import type { IIngredient } from '../../pages/home/types';
 
 import { createSelector } from 'reselect';
 

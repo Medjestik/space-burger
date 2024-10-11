@@ -1,0 +1,24 @@
+.link {
+	color: inherit;
+	text-decoration: none;
+}
+.card {
+	width: 100%;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+	background-color: var(--background-color);
+	border-radius: 16px;
+	transition: all .3s ease-in-out;
+	&_dragging {
+		opacity: .2;
+	}
+}
+.card:hover {
+	cursor: pointer;
+}
+.name {
+	text-align: center;
+}
