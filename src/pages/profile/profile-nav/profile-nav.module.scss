@@ -1,0 +1,24 @@
+.nav {
+	width: 100%;
+	max-width: 320px;
+	display: flex;
+	flex-direction: column;
+}
+.link {
+	width: 100%;
+	text-decoration: none;
+	text-align: left;
+	border: none;
+	background: inherit;
+	outline: none;
+	transition: opacity .3s ease-in-out;
+	&:hover {
+		opacity: .7;
+		cursor: pointer;
+	}
+	&_active {
+		color: var(--white-color);
+		user-select: none;
+		pointer-events: none;
+	}
+}

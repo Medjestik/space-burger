@@ -1,8 +1,8 @@
-import type { IIngredient } from '../../components/main/types';
+import type { IIngredient } from '../../pages/home/types';
 import type {
 	IIngredientConstructor,
 	IBurgerConstructor,
-} from '../../components/main/burger-constructor/types';
+} from '../../pages/home/burger-constructor/types';
 
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
@@ -35,8 +35,17 @@ export const burgerConstructorSlice = createSlice({
 			ingredients.splice(toIndex, 0, ingredients.splice(fromIndex, 1)[0]);
 			state.ingredients = ingredients;
 		},
+		clearConstructor(state) {
+			state.bun = null;
+			state.ingredients = [];
+		},
 	},
 });
 
-export const { addBun, addIngredient, removeIngredient, sortIngredients } =
-	burgerConstructorSlice.actions;
+export const {
+	addBun,
+	addIngredient,
+	removeIngredient,
+	sortIngredients,
+	clearConstructor,
+} = burgerConstructorSlice.actions;

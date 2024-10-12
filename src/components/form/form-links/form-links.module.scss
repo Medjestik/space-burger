@@ -1,0 +1,12 @@
+.container {
+	width: 100%;
+	display: grid;
+	justify-items: center;
+	grid-template-columns: 1fr;
+	gap: 16px;
+}
+
+.link {
+	padding: 0;
+	text-decoration: none;
+}

@@ -1,0 +1,19 @@
+.link {
+	color: var(--white-color);
+	text-decoration: none;
+	text-transform: none;
+}
+.container {
+	margin: 0;
+	padding: 16px 20px;
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: 24px 1fr;
+	gap: 8px;
+	align-items: center;
+	transition: all .3s ease-in-out;
+}
+.container:hover {
+	cursor: pointer;
+	opacity: .7;
+}

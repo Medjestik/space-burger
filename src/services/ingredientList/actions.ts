@@ -1,4 +1,4 @@
-import type { IIngredient } from '../../components/main/types';
+import type { IIngredient } from '../../pages/home/types';
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getIngredients } from '../../api';

@@ -1,4 +1,4 @@
-import type { IIngredient } from '../../components/main/types';
+import type { IIngredient } from '../../pages/home/types';
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { getIngredientList } from './actions';
