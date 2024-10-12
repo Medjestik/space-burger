@@ -2,6 +2,8 @@ import type { FC } from 'react';
 
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 
+import { Link } from 'react-router-dom';
+
 import { HeaderLink } from './header-link/header-link';
 import { EHeaderLink } from './header-link/types';
 import { EROUTES } from '../../utils/routes';
@@ -24,7 +26,9 @@ export const Header: FC = () => {
 				/>
 			</nav>
 			<div className={styles.logo}>
-				<Logo />
+				<Link to={EROUTES.HOME}>
+					<Logo />
+				</Link>
 			</div>
 			<HeaderLink
 				icon={EHeaderLink.Profile}

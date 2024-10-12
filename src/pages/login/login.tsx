@@ -1,9 +1,9 @@
-import type { FC, ChangeEvent, FormEvent } from 'react';
+import type { FC, FormEvent } from 'react';
 import type { TRootState } from '../../services/store';
 
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useForm } from '../../hooks/useForm';
 
 import {
 	EmailInput,
@@ -41,19 +41,14 @@ export const LoginPage: FC = () => {
 	const dispatch = useAppDispatch();
 	const { isLoading } = useSelector((state: TRootState) => state.auth);
 
-	const [formData, setFormData] = useState<ILoginForm>({
+	const { values, handleChange } = useForm<ILoginForm>({
 		email: '',
 		password: '',
 	});
 
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = e.target;
-		setFormData((prevData) => ({ ...prevData, [name]: value }));
-	};
-
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		dispatch(loginUser(formData));
+		dispatch(loginUser(values));
 	};
 
 	return (
@@ -61,13 +56,13 @@ export const LoginPage: FC = () => {
 			<Form title='Вход' name='form-login' onSubmit={handleSubmit}>
 				<EmailInput
 					onChange={handleChange}
-					value={formData.email}
+					value={values.email}
 					name={'email'}
 					isIcon={false}
 				/>
 				<PasswordInput
 					onChange={handleChange}
-					value={formData.password}
+					value={values.password}
 					name={'password'}
 				/>
 				<FormSubmit text='Войти' isBlock={isLoading} />

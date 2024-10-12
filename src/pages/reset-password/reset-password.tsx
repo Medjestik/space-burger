@@ -1,9 +1,10 @@
-import type { FC, ChangeEvent, FormEvent } from 'react';
+import type { FC, FormEvent } from 'react';
 import type { TRootState } from '../../services/store';
 
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useForm } from '../../hooks/useForm';
 
 import {
 	Input,
@@ -36,20 +37,15 @@ export const ResetPasswordPage: FC = () => {
 	const navigate = useNavigate();
 	const { isLoading } = useSelector((state: TRootState) => state.auth);
 
-	const [formData, setFormData] = useState<IResetPasswordForm>({
+	const { values, handleChange } = useForm<IResetPasswordForm>({
 		password: '',
 		token: '',
 	});
 
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = e.target;
-		setFormData((prevData) => ({ ...prevData, [name]: value }));
-	};
-
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		try {
-			resetPasswordUser(formData).then(() =>
+			resetPasswordUser(values).then(() =>
 				localStorage.removeItem('fromForgotPassword')
 			);
 		} catch (error) {
@@ -72,13 +68,13 @@ export const ResetPasswordPage: FC = () => {
 				onSubmit={handleSubmit}>
 				<PasswordInput
 					onChange={handleChange}
-					value={formData.password}
+					value={values.password}
 					name={'password'}
 					placeholder={'Введите новый пароль'}
 				/>
 				<Input
 					onChange={handleChange}
-					value={formData.token}
+					value={values.token}
 					name={'token'}
 					placeholder={'Введите код из письма'}
 				/>

@@ -1,9 +1,10 @@
-import type { FC, ChangeEvent, FormEvent } from 'react';
+import type { FC, FormEvent } from 'react';
 import type { TRootState } from '../../../services/store';
 
 import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { useForm } from '../../../hooks/useForm';
 
 import {
 	Input,
@@ -28,20 +29,16 @@ interface IProfileForm {
 export const ProfileForm: FC = () => {
 	const dispatch = useAppDispatch();
 	const { user } = useSelector((state: TRootState) => state.auth);
-	const [formData, setFormData] = useState<IProfileForm>({
+	const { values, handleChange, setValues } = useForm<IProfileForm>({
 		name: user?.name || '',
 		email: user?.email || '',
 		password: '',
 	});
+
 	const [isBlockNameInput, setIsBlockNameInput] = useState<boolean>(true);
 	const [isShowFormButtons, setIsShowFormButtons] = useState<boolean>(false);
 
 	const nameInputRef = useRef<HTMLInputElement | null>(null);
-
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = e.target;
-		setFormData((prevData) => ({ ...prevData, [name]: value }));
-	};
 
 	const onIconNameClick = () => {
 		setIsBlockNameInput(false);
@@ -53,7 +50,7 @@ export const ProfileForm: FC = () => {
 	};
 
 	const handleClearForm = () => {
-		setFormData({
+		setValues({
 			name: user?.name || '',
 			email: user?.email || '',
 			password: '',
@@ -63,15 +60,15 @@ export const ProfileForm: FC = () => {
 
 	useEffect(() => {
 		const isFormChange =
-			formData.name !== user?.name ||
-			formData.email !== user?.email ||
-			formData.password !== '';
+			values.name !== user?.name ||
+			values.email !== user?.email ||
+			values.password !== '';
 		setIsShowFormButtons(isFormChange);
-	}, [formData, user?.name, user?.email]);
+	}, [values, user?.name, user?.email]);
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		dispatch(updateUserData(formData));
+		dispatch(updateUserData(values));
 	};
 
 	return (
@@ -79,7 +76,7 @@ export const ProfileForm: FC = () => {
 			<Form name='form-profile' onSubmit={handleSubmit}>
 				<Input
 					onChange={handleChange}
-					value={formData.name}
+					value={values.name}
 					name={'name'}
 					type={'text'}
 					icon={'EditIcon'}
@@ -91,14 +88,14 @@ export const ProfileForm: FC = () => {
 				/>
 				<EmailInput
 					onChange={handleChange}
-					value={formData.email}
+					value={values.email}
 					name={'email'}
 					isIcon={true}
 					placeholder={'Логин'}
 				/>
 				<PasswordInput
 					onChange={handleChange}
-					value={formData.password}
+					value={values.password}
 					name={'password'}
 					icon={'EditIcon'}
 				/>

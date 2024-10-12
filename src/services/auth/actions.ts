@@ -17,26 +17,17 @@ import { setIsAuthChecked } from './reducer';
 
 export const loginUser = createAsyncThunk<IAuthResponse, ILoginRequest>(
 	'auth/login',
-	async (data) => {
-		const response = await api.login(data);
-		return response;
-	}
+	api.login
 );
 
 export const registerUser = createAsyncThunk<IAuthResponse, IRegisterRequest>(
 	'auth/register',
-	async (data) => {
-		const response = await api.register(data);
-		return response;
-	}
+	api.register
 );
 
 export const logoutUser = createAsyncThunk<IMessageResponse, ITokenRequest>(
 	'auth/logout',
-	async (data) => {
-		const response = await api.logout(data);
-		return response;
-	}
+	api.logout
 );
 
 export const forgotPasswordUser = async (

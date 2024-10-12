@@ -1,9 +1,9 @@
-import type { FC, ChangeEvent, FormEvent } from 'react';
+import type { FC, FormEvent } from 'react';
 import type { TRootState } from '../../services/store';
 
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useForm } from '../../hooks/useForm';
 
 import {
 	Input,
@@ -38,20 +38,15 @@ export const RegisterPage: FC = () => {
 	const dispatch = useAppDispatch();
 	const { isLoading } = useSelector((state: TRootState) => state.auth);
 
-	const [formData, setFormData] = useState<IRegisterForm>({
+	const { values, handleChange } = useForm<IRegisterForm>({
 		name: '',
 		email: '',
 		password: '',
 	});
 
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = e.target;
-		setFormData((prevData) => ({ ...prevData, [name]: value }));
-	};
-
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		dispatch(registerUser(formData));
+		dispatch(registerUser(values));
 	};
 
 	return (
@@ -59,20 +54,20 @@ export const RegisterPage: FC = () => {
 			<Form title='Регистрация' name='form-register' onSubmit={handleSubmit}>
 				<Input
 					onChange={handleChange}
-					value={formData.name}
+					value={values.name}
 					name={'name'}
 					type={'text'}
 					placeholder={'Имя'}
 				/>
 				<EmailInput
 					onChange={handleChange}
-					value={formData.email}
+					value={values.email}
 					name={'email'}
 					isIcon={false}
 				/>
 				<PasswordInput
 					onChange={handleChange}
-					value={formData.password}
+					value={values.password}
 					name={'password'}
 				/>
 				<FormSubmit text='Зарегистрироваться' isBlock={isLoading} />

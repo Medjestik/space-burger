@@ -1,9 +1,9 @@
-import type { FC, ChangeEvent, FormEvent } from 'react';
+import type { FC, FormEvent } from 'react';
 import type { TRootState } from '../../services/store';
 
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from '../../hooks/useForm';
 
 import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -32,19 +32,14 @@ export const ForgotPasswordPage: FC = () => {
 	const navigate = useNavigate();
 	const { isLoading } = useSelector((state: TRootState) => state.auth);
 
-	const [formData, setFormData] = useState<IForgotPasswordForm>({
+	const { values, handleChange } = useForm<IForgotPasswordForm>({
 		email: '',
 	});
-
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = e.target;
-		setFormData((prevData) => ({ ...prevData, [name]: value }));
-	};
 
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		try {
-			forgotPasswordUser(formData).then(() => {
+			forgotPasswordUser(values).then(() => {
 				localStorage.setItem('fromForgotPassword', 'true');
 				navigate(EROUTES.RESET_PASSWORD);
 			});
@@ -61,7 +56,7 @@ export const ForgotPasswordPage: FC = () => {
 				onSubmit={handleSubmit}>
 				<EmailInput
 					onChange={handleChange}
-					value={formData.email}
+					value={values.email}
 					name={'email'}
 					placeholder='Укажите e-mail'
 					isIcon={false}

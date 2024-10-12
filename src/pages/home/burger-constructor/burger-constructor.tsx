@@ -24,6 +24,7 @@ import { EROUTES } from '../../../utils/routes';
 import {
 	addBun,
 	addIngredient,
+	clearConstructor,
 } from '../../../services/burgerConstructor/reducer';
 import { createBurgerOrder } from '../../../services/burgerOrder/actions';
 import { closeCreateOrderModal } from '../../../services/burgerOrder/reducer';
@@ -78,8 +79,15 @@ const BurgerConstructor: FC = () => {
 			return;
 		}
 		if (ingredientsId && ingredientsId.length > 0) {
-			dispatch(createBurgerOrder({ ingredients: ingredientsId }));
-			localStorage.removeItem('constructor');
+			dispatch(createBurgerOrder({ ingredients: ingredientsId }))
+				.unwrap()
+				.then(() => {
+					dispatch(clearConstructor());
+					localStorage.removeItem('constructor');
+				})
+				.catch((error) => {
+					console.error('Ошибка создания заказа:', error);
+				});
 		}
 	};
 
