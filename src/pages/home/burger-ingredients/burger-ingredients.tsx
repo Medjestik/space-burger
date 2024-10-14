@@ -3,14 +3,14 @@ import { EIngredients } from '../types';
 
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import IngredientsTabs from './ingredients-tabs/ingredients-tabs';
-import IngredientsList from './ingredients-list/ingredients-list';
+import { IngredientsTabs } from './ingredients-tabs/ingredients-tabs';
+import { IngredientsList } from './ingredients-list/ingredients-list';
 
 import { getCategorizedIngredients } from '../../../services/ingredientList/selectors';
 
 import styles from './burger-ingredients.module.scss';
 
-const BurgerIngredients: FC = () => {
+export const BurgerIngredients: FC = () => {
 	const categorizedIngredients = useSelector(getCategorizedIngredients);
 	const [currentTab, setCurrentTab] = useState<EIngredients>(EIngredients.Bun);
 
@@ -83,5 +83,3 @@ const BurgerIngredients: FC = () => {
 		</section>
 	);
 };
-
-export default BurgerIngredients;

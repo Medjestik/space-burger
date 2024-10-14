@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 export enum EHeaderLink {
 	Burger = 'burger',
 	List = 'list',
@@ -11,9 +9,3 @@ export interface INavLink {
 	text: string;
 	url: string;
 }
-
-export const navLinkPropTypes = {
-	icon: PropTypes.oneOf(Object.values(EHeaderLink)).isRequired,
-	text: PropTypes.string.isRequired,
-	url: PropTypes.string.isRequired,
-};

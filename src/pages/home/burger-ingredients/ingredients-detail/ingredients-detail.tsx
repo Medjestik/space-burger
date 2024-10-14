@@ -1,8 +1,5 @@
 import type { FC } from 'react';
-import {
-	type IIngredientDetailProps,
-	ingredientDetailPropTypes,
-} from '../types';
+import type { IIngredientDetailProps } from '../types';
 
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -12,7 +9,7 @@ import { getIngredientById } from '../../../../services/ingredientList/selectors
 
 import styles from './ingredients-detail.module.scss';
 
-const IngredientDetail: FC<IIngredientDetailProps> = ({ title }) => {
+export const IngredientDetail: FC<IIngredientDetailProps> = ({ title }) => {
 	const { ingredientId } = useParams<{ ingredientId: string }>();
 	const ingredient = useSelector(
 		ingredientId ? getIngredientById(ingredientId) : () => null
@@ -59,7 +56,3 @@ const IngredientDetail: FC<IIngredientDetailProps> = ({ title }) => {
 		)
 	);
 };
-
-IngredientDetail.propTypes = ingredientDetailPropTypes;
-
-export default IngredientDetail;

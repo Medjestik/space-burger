@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { type IIngredientCardProps, ingredientCardPropTypes } from '../types';
+import type { IIngredientCardProps } from '../types';
 import type { TRootState } from '../../../../services/store';
 
 import { Link, useLocation } from 'react-router-dom';
@@ -9,11 +9,11 @@ import { useDrag } from 'react-dnd';
 import { getIngredientCount } from '../../../../services/burgerConstructor/selectors';
 
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import Price from '../../../../components/price/price';
+import { Price } from '../../../../components/price/price';
 
 import styles from './ingredients-card.module.scss';
 
-const IngredientsCard: FC<IIngredientCardProps> = ({ ingredient }) => {
+export const IngredientsCard: FC<IIngredientCardProps> = ({ ingredient }) => {
 	const location = useLocation();
 	const ingredientId = ingredient['_id'];
 	const countIngredient = useSelector((state: TRootState) =>
@@ -53,7 +53,3 @@ const IngredientsCard: FC<IIngredientCardProps> = ({ ingredient }) => {
 		</Link>
 	);
 };
-
-IngredientsCard.propTypes = ingredientCardPropTypes;
-
-export default IngredientsCard;

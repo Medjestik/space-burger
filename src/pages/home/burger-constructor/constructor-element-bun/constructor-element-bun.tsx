@@ -2,12 +2,11 @@ import type { FC } from 'react';
 import {
 	type IConstructorElementBun,
 	EConstructorElementBunPosition,
-	constructorElementBunPropTypes,
 } from '../types';
 
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 
-const ConstructorElementBun: FC<IConstructorElementBun> = ({
+export const ConstructorElementBun: FC<IConstructorElementBun> = ({
 	bun,
 	position,
 }) => {
@@ -24,7 +23,3 @@ const ConstructorElementBun: FC<IConstructorElementBun> = ({
 		/>
 	);
 };
-
-ConstructorElementBun.propTypes = constructorElementBunPropTypes;
-
-export default ConstructorElementBun;

@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { type IFormProps, formPropTypes } from './types';
+import type { IFormProps } from './types';
 
 import styles from './form.module.scss';
 
@@ -15,5 +15,3 @@ export const Form: FC<IFormProps> = ({ title, name, onSubmit, children }) => {
 		</form>
 	);
 };
-
-Form.propTypes = formPropTypes;

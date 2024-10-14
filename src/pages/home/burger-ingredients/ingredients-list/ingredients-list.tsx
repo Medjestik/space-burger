@@ -1,14 +1,14 @@
 import type { ForwardedRef } from 'react';
 import type { IIngredient } from '../../types';
-import { type IIngredientsListProps, ingredientsListPropTypes } from '../types';
+import type { IIngredientsListProps } from '../types';
 
 import { forwardRef } from 'react';
 
-import IngredientsCard from '../ingredients-card/ingredients-card';
+import { IngredientsCard } from '../ingredients-card/ingredients-card';
 
 import styles from './ingredients-list.module.scss';
 
-const IngredientsList = forwardRef(
+export const IngredientsList = forwardRef(
 	(
 		{ title, ingredientsList }: IIngredientsListProps,
 		ref: ForwardedRef<HTMLUListElement>
@@ -27,10 +27,3 @@ const IngredientsList = forwardRef(
 );
 
 IngredientsList.displayName = 'IngredientsList';
-
-IngredientsList.propTypes = {
-	title: ingredientsListPropTypes.title,
-	ingredientsList: ingredientsListPropTypes.ingredientsList,
-};
-
-export default IngredientsList;

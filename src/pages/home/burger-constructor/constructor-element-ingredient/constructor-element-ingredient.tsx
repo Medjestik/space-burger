@@ -1,8 +1,5 @@
 import type { FC } from 'react';
-import {
-	type IConstructorElementIngredient,
-	constructorElementIngredientPropTypes,
-} from '../types';
+import type { IConstructorElementIngredient } from '../types';
 
 import { useDrag, useDrop } from 'react-dnd';
 import { useAppDispatch } from '../../../../hooks/useAppDispatch';
@@ -19,10 +16,9 @@ import {
 
 import styles from '../burger-constructor.module.scss';
 
-const ConstructorElementIngredient: FC<IConstructorElementIngredient> = ({
-	ingredient,
-	index,
-}) => {
+export const ConstructorElementIngredient: FC<
+	IConstructorElementIngredient
+> = ({ ingredient, index }) => {
 	const dispatch = useAppDispatch();
 
 	const handleRemoveIngredient = (ingredientId: string) => {
@@ -63,7 +59,3 @@ const ConstructorElementIngredient: FC<IConstructorElementIngredient> = ({
 		</li>
 	);
 };
-
-ConstructorElementIngredient.propTypes = constructorElementIngredientPropTypes;
-
-export default ConstructorElementIngredient;

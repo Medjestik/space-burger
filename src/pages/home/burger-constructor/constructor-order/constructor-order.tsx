@@ -7,7 +7,7 @@ import image from '../../../../images/order-done.svg';
 
 import styles from './constructor-order.module.scss';
 
-const ConstructorOrder: FC = () => {
+export const ConstructorOrder: FC = () => {
 	const { orderData } = useSelector((state: TRootState) => state.burgerOrder);
 
 	return (
@@ -24,5 +24,3 @@ const ConstructorOrder: FC = () => {
 		</>
 	);
 };
-
-export default ConstructorOrder;
