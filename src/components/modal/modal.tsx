@@ -1,15 +1,15 @@
 import type { FC } from 'react';
-import { type IModalProps, modalPropTypes } from './types';
+import type { IModalProps } from './types';
 
 import ReactDOM from 'react-dom';
 
-import ModalOverlay from './modal-overlay/modal-overlay';
+import { ModalOverlay } from './modal-overlay/modal-overlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import useOnPressEsc from '../../hooks/useOnPressEsc';
 
 import styles from './modal.module.scss';
 
-const Modal: FC<IModalProps> = ({
+export const Modal: FC<IModalProps> = ({
 	isOpen,
 	onClose,
 	title,
@@ -47,7 +47,3 @@ const Modal: FC<IModalProps> = ({
 
 	return ReactDOM.createPortal(modalContent, modalRoot || document.body);
 };
-
-Modal.propTypes = modalPropTypes;
-
-export default Modal;

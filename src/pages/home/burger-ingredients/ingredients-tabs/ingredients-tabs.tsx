@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { type IIngredientTabsProps, ingredientTabsPropTypes } from '../types';
+import type { IIngredientTabsProps } from '../types';
 
 import { EIngredients } from '../../types';
 
@@ -13,7 +13,10 @@ const tabs = [
 	{ value: EIngredients.Main, label: 'Начинки' },
 ];
 
-const IngredientsTabs: FC<IIngredientTabsProps> = ({ currentTab, onClick }) => {
+export const IngredientsTabs: FC<IIngredientTabsProps> = ({
+	currentTab,
+	onClick,
+}) => {
 	return (
 		<div className={styles.tabs}>
 			{tabs.map((tab) => (
@@ -28,7 +31,3 @@ const IngredientsTabs: FC<IIngredientTabsProps> = ({ currentTab, onClick }) => {
 		</div>
 	);
 };
-
-IngredientsTabs.propTypes = ingredientTabsPropTypes;
-
-export default IngredientsTabs;

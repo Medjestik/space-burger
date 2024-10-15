@@ -1,9 +1,5 @@
 import type { FC } from 'react';
-import {
-	type IFormLinksProps,
-	type IFormLink,
-	formLinksPropTypes,
-} from '../types';
+import type { IFormLinksProps, IFormLink } from '../types';
 
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -32,5 +28,3 @@ export const FormLinks: FC<IFormLinksProps> = ({ links }) => {
 		</nav>
 	);
 };
-
-FormLinks.propTypes = formLinksPropTypes;

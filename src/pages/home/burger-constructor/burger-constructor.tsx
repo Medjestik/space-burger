@@ -11,12 +11,12 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import Price from '../../../components/price/price';
-import Modal from '../../../components/modal/modal';
-import ConstructorElementBun from './constructor-element-bun/constructor-element-bun';
-import ConstructorElementIngredient from './constructor-element-ingredient/constructor-element-ingredient';
-import ConstructorStub from './constructor-stub/constructor-stub';
-import ConstructorOrder from './constructor-order/constructor-order';
+import { Price } from '../../../components/price/price';
+import { Modal } from '../../../components/modal/modal';
+import { ConstructorElementBun } from './constructor-element-bun/constructor-element-bun';
+import { ConstructorElementIngredient } from './constructor-element-ingredient/constructor-element-ingredient';
+import { ConstructorStub } from './constructor-stub/constructor-stub';
+import { ConstructorOrder } from './constructor-order/constructor-order';
 import { Preloader } from '../../../components/preloader/preloader';
 
 import { EROUTES } from '../../../utils/routes';
@@ -37,7 +37,7 @@ import { EConstructorStubType, EConstructorElementBunPosition } from './types';
 
 import styles from './burger-constructor.module.scss';
 
-const BurgerConstructor: FC = () => {
+export const BurgerConstructor: FC = () => {
 	const dispatch = useAppDispatch();
 	const { bun, ingredients } = useSelector(
 		(state: TRootState) => state.burgerConstructor
@@ -190,5 +190,3 @@ const BurgerConstructor: FC = () => {
 		</section>
 	);
 };
-
-export default BurgerConstructor;

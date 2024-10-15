@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { type INavLink, navLinkPropTypes } from './types';
+import type { INavLink } from './types';
 
 import {
 	BurgerIcon,
@@ -34,5 +34,3 @@ export const HeaderLink: FC<INavLink> = ({ icon, text, url }) => {
 		</NavLink>
 	);
 };
-
-HeaderLink.propTypes = navLinkPropTypes;

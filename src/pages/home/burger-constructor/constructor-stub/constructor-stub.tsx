@@ -1,13 +1,9 @@
 import type { FC } from 'react';
-import {
-	type IConstructorStubProps,
-	EConstructorStubType,
-	constructorStubPropTypes,
-} from '../types';
+import { type IConstructorStubProps, EConstructorStubType } from '../types';
 
 import styles from './constructor-stub.module.scss';
 
-const ConstructorStub: FC<IConstructorStubProps> = ({
+export const ConstructorStub: FC<IConstructorStubProps> = ({
 	type = 'ingredient',
 	isHover = false,
 }) => {
@@ -26,7 +22,3 @@ const ConstructorStub: FC<IConstructorStubProps> = ({
 		</div>
 	);
 };
-
-ConstructorStub.propTypes = constructorStubPropTypes;
-
-export default ConstructorStub;
