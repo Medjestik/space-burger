@@ -21,6 +21,7 @@ import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 import { NotFoundPage } from '../pages/not-found/not-found';
 import { Modal } from '../components/modal/modal';
 import { IngredientDetail } from '../pages/home/burger-ingredients/ingredients-detail/ingredients-detail';
+import { OrdersDetail } from '../components/orders/orders-detail/orders-detail';
 
 import { EROUTES } from '../utils/routes';
 import { getIngredientList } from '../services/ingredientList/actions';
@@ -63,6 +64,7 @@ export const App = () => {
 			<Routes location={background || location}>
 				<Route path={EROUTES.HOME} element={<HomePage />} />
 				<Route path={EROUTES.FEED} element={<FeedPage />} />
+				<Route path={`${EROUTES.FEED}/:number`} element={<OrdersDetail />} />
 				<Route path={EROUTES.NOT_FOUND} element={<NotFoundPage />} />
 
 				<Route
@@ -88,6 +90,11 @@ export const App = () => {
 				/>
 
 				<Route
+					path={`${EROUTES.PROFILE}/orders/:number`}
+					element={<OnlyAuth component={<OrdersDetail />} />}
+				/>
+
+				<Route
 					path={`${EROUTES.INGREDIENTS}/:ingredientId`}
 					element={<IngredientDetail title='Детали ингредиента' />}
 				/>
@@ -104,6 +111,28 @@ export const App = () => {
 								title='Детали ингредиента'>
 								<IngredientDetail />
 							</Modal>
+						}
+					/>
+					<Route
+						path={`${EROUTES.FEED}/:number`}
+						element={
+							<Modal isOpen={true} onClose={() => handleModalClose(navigate)}>
+								<OrdersDetail />
+							</Modal>
+						}
+					/>
+					<Route
+						path={`${EROUTES.PROFILE}/orders/:number`}
+						element={
+							<OnlyAuth
+								component={
+									<Modal
+										isOpen={true}
+										onClose={() => handleModalClose(navigate)}>
+										<OrdersDetail />
+									</Modal>
+								}
+							/>
 						}
 					/>
 				</Routes>

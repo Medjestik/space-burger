@@ -1,12 +1,13 @@
-import type { IOrderData } from './types';
+import type { IBurgerOrderStore, IGetOrderResponse, IOrderData } from './types';
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { createBurgerOrder } from './actions';
+import { getOrderByNumber, createBurgerOrder } from './actions';
 
-const initialState = {
-	orderData: null as IOrderData | null,
+const initialState: IBurgerOrderStore = {
+	orderData: null,
+	currentOrder: null,
 	loading: false,
-	error: null as string | null,
+	error: null,
 };
 
 export const burgerOrderSlice = createSlice({
@@ -19,6 +20,12 @@ export const burgerOrderSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
+			.addCase(
+				getOrderByNumber.fulfilled,
+				(state, action: PayloadAction<IGetOrderResponse>) => {
+					state.currentOrder = action.payload.orders[0];
+				}
+			)
 			.addCase(
 				createBurgerOrder.fulfilled,
 				(state, action: PayloadAction<IOrderData>) => {
