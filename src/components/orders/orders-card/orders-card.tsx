@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import type { IOrdersCardProps } from '../types';
 
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../services/store';
 import { Link, useLocation } from 'react-router-dom';
 
 import { FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';

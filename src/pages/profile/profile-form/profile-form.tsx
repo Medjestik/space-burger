@@ -1,9 +1,7 @@
 import type { FC, FormEvent } from 'react';
-import type { TRootState } from '../../../services/store';
 
 import { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { useDispatch, useSelector } from '../../../services/store';
 import { useForm } from '../../../hooks/useForm';
 
 import {
@@ -27,8 +25,8 @@ interface IProfileForm {
 }
 
 export const ProfileForm: FC = () => {
-	const dispatch = useAppDispatch();
-	const { user } = useSelector((state: TRootState) => state.auth);
+	const dispatch = useDispatch();
+	const { user } = useSelector((state) => state.auth);
 	const { values, handleChange, setValues } = useForm<IProfileForm>({
 		name: user?.name || '',
 		email: user?.email || '',

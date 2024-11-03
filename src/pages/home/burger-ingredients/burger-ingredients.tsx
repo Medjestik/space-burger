@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { EIngredients } from '../types';
 
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../services/store';
 import { IngredientsTabs } from './ingredients-tabs/ingredients-tabs';
 import { IngredientsList } from './ingredients-list/ingredients-list';
 

@@ -1,9 +1,6 @@
-import type { TAppDispatch, TRootState } from '../services/store';
-
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../hooks/useAppDispatch';
+import { useSelector, useDispatch } from '../services/store';
 
 import {
 	OnlyAuth,
@@ -34,10 +31,8 @@ export const App = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const background = location.state && location.state.background;
-	const dispatch: TAppDispatch = useAppDispatch();
-	const { loading, error } = useSelector(
-		(state: TRootState) => state.ingredientList
-	);
+	const dispatch = useDispatch();
+	const { loading, error } = useSelector((state) => state.ingredientList);
 
 	const fetchInitialData = async () => {
 		await Promise.all([

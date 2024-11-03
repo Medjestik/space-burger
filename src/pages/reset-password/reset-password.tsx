@@ -1,9 +1,8 @@
 import type { FC, FormEvent } from 'react';
-import type { TRootState } from '../../services/store';
 
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/store';
 import { useForm } from '../../hooks/useForm';
 
 import {
@@ -35,7 +34,7 @@ const links = [
 
 export const ResetPasswordPage: FC = () => {
 	const navigate = useNavigate();
-	const { isLoading } = useSelector((state: TRootState) => state.auth);
+	const { isLoading } = useSelector((state) => state.auth);
 
 	const { values, handleChange } = useForm<IResetPasswordForm>({
 		password: '',

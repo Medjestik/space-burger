@@ -1,9 +1,8 @@
 import type { FC } from 'react';
 import type { IIngredientCardProps } from '../types';
-import type { TRootState } from '../../../../services/store';
 
 import { Link, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../../services/store';
 import { useDrag } from 'react-dnd';
 
 import { getIngredientCount } from '../../../../services/burgerConstructor/selectors';
@@ -16,7 +15,7 @@ import styles from './ingredients-card.module.scss';
 export const IngredientsCard: FC<IIngredientCardProps> = ({ ingredient }) => {
 	const location = useLocation();
 	const ingredientId = ingredient['_id'];
-	const countIngredient = useSelector((state: TRootState) =>
+	const countIngredient = useSelector((state) =>
 		getIngredientCount(state, ingredient._id)
 	);
 

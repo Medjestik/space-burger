@@ -1,14 +1,13 @@
 import type { FC } from 'react';
-import type { TRootState } from '../../../../services/store';
 
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../../services/store';
 
 import image from '../../../../images/order-done.svg';
 
 import styles from './constructor-order.module.scss';
 
 export const ConstructorOrder: FC = () => {
-	const { orderData } = useSelector((state: TRootState) => state.burgerOrder);
+	const { orderData } = useSelector((state) => state.burgerOrder);
 
 	return (
 		<>

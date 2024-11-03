@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import type { IIngredient } from '../../../pages/home/types';
 
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../services/store';
 
 import { selectIngredientList } from '../../../services/ingredientList/selectors';
 

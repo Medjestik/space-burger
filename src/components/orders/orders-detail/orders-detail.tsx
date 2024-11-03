@@ -2,11 +2,7 @@ import type { FC } from 'react';
 
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import {
-	useDispatch,
-	useSelector as useSelectorStore,
-} from '../../../services/store';
+import { useDispatch, useSelector } from '../../../services/store';
 
 import { FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { OrdersStatus } from '../orders-status/orders-status';
@@ -23,7 +19,7 @@ export const OrdersDetail: FC = () => {
 	const { number } = useParams();
 	const dispatch = useDispatch();
 
-	const order = useSelectorStore((state) => {
+	const order = useSelector((state) => {
 		if (number) {
 			let order = state.feedOrders.ordersData.orders.find(
 				(o) => o.number === +number
