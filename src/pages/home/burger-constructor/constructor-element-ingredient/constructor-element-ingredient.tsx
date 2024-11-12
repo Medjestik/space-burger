@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import type { IConstructorElementIngredient } from '../types';
 
 import { useDrag, useDrop } from 'react-dnd';
-import { useAppDispatch } from '../../../../hooks/useAppDispatch';
+import { useDispatch } from '../../../../services/store';
 
 import {
 	removeIngredient,
@@ -19,7 +19,7 @@ import styles from '../burger-constructor.module.scss';
 export const ConstructorElementIngredient: FC<
 	IConstructorElementIngredient
 > = ({ ingredient, index }) => {
-	const dispatch = useAppDispatch();
+	const dispatch = useDispatch();
 
 	const handleRemoveIngredient = (ingredientId: string) => {
 		dispatch(removeIngredient(ingredientId));

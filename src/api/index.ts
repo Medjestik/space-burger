@@ -185,3 +185,14 @@ export const createOrder = (data: ICreateOrderRequest) => {
 		body: JSON.stringify(data),
 	});
 };
+
+export const getOrder = (number: string) => {
+	return request(`/orders/${number}`, {
+		method: 'GET',
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			authorization: localStorage.getItem('accessToken') || '',
+		},
+	});
+};

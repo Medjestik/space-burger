@@ -1,7 +1,7 @@
 import type { FC, ReactElement } from 'react';
 import type { IProtectedProps } from './types';
 
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/store';
 import { getIsAuthChecked, getUser } from '../../services/auth/reducer';
 import { Navigate, useLocation } from 'react-router-dom';
 

@@ -1,9 +1,6 @@
-import type { TAppDispatch, TRootState } from '../services/store';
-
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../hooks/useAppDispatch';
+import { useSelector, useDispatch } from '../services/store';
 
 import {
 	OnlyAuth,
@@ -21,6 +18,7 @@ import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 import { NotFoundPage } from '../pages/not-found/not-found';
 import { Modal } from '../components/modal/modal';
 import { IngredientDetail } from '../pages/home/burger-ingredients/ingredients-detail/ingredients-detail';
+import { OrdersDetail } from '../components/orders/orders-detail/orders-detail';
 
 import { EROUTES } from '../utils/routes';
 import { getIngredientList } from '../services/ingredientList/actions';
@@ -33,10 +31,8 @@ export const App = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const background = location.state && location.state.background;
-	const dispatch: TAppDispatch = useAppDispatch();
-	const { loading, error } = useSelector(
-		(state: TRootState) => state.ingredientList
-	);
+	const dispatch = useDispatch();
+	const { loading, error } = useSelector((state) => state.ingredientList);
 
 	const fetchInitialData = async () => {
 		await Promise.all([
@@ -63,6 +59,7 @@ export const App = () => {
 			<Routes location={background || location}>
 				<Route path={EROUTES.HOME} element={<HomePage />} />
 				<Route path={EROUTES.FEED} element={<FeedPage />} />
+				<Route path={`${EROUTES.FEED}/:number`} element={<OrdersDetail />} />
 				<Route path={EROUTES.NOT_FOUND} element={<NotFoundPage />} />
 
 				<Route
@@ -88,6 +85,11 @@ export const App = () => {
 				/>
 
 				<Route
+					path={`${EROUTES.PROFILE}/orders/:number`}
+					element={<OnlyAuth component={<OrdersDetail />} />}
+				/>
+
+				<Route
 					path={`${EROUTES.INGREDIENTS}/:ingredientId`}
 					element={<IngredientDetail title='Детали ингредиента' />}
 				/>
@@ -104,6 +106,28 @@ export const App = () => {
 								title='Детали ингредиента'>
 								<IngredientDetail />
 							</Modal>
+						}
+					/>
+					<Route
+						path={`${EROUTES.FEED}/:number`}
+						element={
+							<Modal isOpen={true} onClose={() => handleModalClose(navigate)}>
+								<OrdersDetail />
+							</Modal>
+						}
+					/>
+					<Route
+						path={`${EROUTES.PROFILE}/orders/:number`}
+						element={
+							<OnlyAuth
+								component={
+									<Modal
+										isOpen={true}
+										onClose={() => handleModalClose(navigate)}>
+										<OrdersDetail />
+									</Modal>
+								}
+							/>
 						}
 					/>
 				</Routes>

@@ -1,9 +1,9 @@
 import type { FC } from 'react';
 import type { IIngredientDetailProps } from '../types';
 
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useMemo } from 'react';
+import { useSelector } from '../../../../services/store';
 
 import { getIngredientById } from '../../../../services/ingredientList/selectors';
 

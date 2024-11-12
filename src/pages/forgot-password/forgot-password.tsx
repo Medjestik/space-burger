@@ -1,8 +1,7 @@
 import type { FC, FormEvent } from 'react';
-import type { TRootState } from '../../services/store';
 
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from '../../services/store';
 import { useForm } from '../../hooks/useForm';
 
 import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -30,7 +29,7 @@ const links = [
 
 export const ForgotPasswordPage: FC = () => {
 	const navigate = useNavigate();
-	const { isLoading } = useSelector((state: TRootState) => state.auth);
+	const { isLoading } = useSelector((state) => state.auth);
 
 	const { values, handleChange } = useForm<IForgotPasswordForm>({
 		email: '',

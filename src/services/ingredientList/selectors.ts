@@ -3,7 +3,7 @@ import { type IIngredient, EIngredients } from '../../pages/home/types';
 
 import { createSelector } from 'reselect';
 
-const selectIngredientList = (state: TRootState) =>
+export const selectIngredientList = (state: TRootState) =>
 	state.ingredientList.ingredientList;
 
 export const getIngredientById = (id: string) =>
@@ -33,3 +33,13 @@ export const getCategorizedIngredients = createSelector(
 		);
 	}
 );
+
+export const countTotalPrice = (ingredientIds: string[]) =>
+	createSelector([selectIngredientList], (ingredientList: IIngredient[]) => {
+		return ingredientIds.reduce((total, id) => {
+			const ingredient = ingredientList.find(
+				(ingredient) => ingredient._id === id
+			);
+			return ingredient ? total + ingredient.price : total;
+		}, 0);
+	});

@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { useDispatch } from '../../../services/store';
 
 import { NavLink } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ import { EROUTES } from '../../../utils/routes';
 import styles from './profile-nav.module.scss';
 
 export const ProfileNav: FC = () => {
-	const dispatch = useAppDispatch();
+	const dispatch = useDispatch();
 	const refreshToken = localStorage.getItem('refreshToken');
 
 	const handleLogout = async () => {

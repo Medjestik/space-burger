@@ -1,11 +1,9 @@
 import type { FC } from 'react';
-import type { TRootState } from '../../../services/store';
 import type { IIngredient } from '../types';
 
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { useDispatch, useSelector } from '../../../services/store';
 import { useDrop } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -38,14 +36,12 @@ import { EConstructorStubType, EConstructorElementBunPosition } from './types';
 import styles from './burger-constructor.module.scss';
 
 export const BurgerConstructor: FC = () => {
-	const dispatch = useAppDispatch();
-	const { bun, ingredients } = useSelector(
-		(state: TRootState) => state.burgerConstructor
-	);
+	const dispatch = useDispatch();
+	const { bun, ingredients } = useSelector((state) => state.burgerConstructor);
 	const { orderData, loading, error } = useSelector(
-		(state: TRootState) => state.burgerOrder
+		(state) => state.burgerOrder
 	);
-	const { user } = useSelector((state: TRootState) => state.auth);
+	const { user } = useSelector((state) => state.auth);
 	const totalPrice = useSelector(getTotalPrice);
 	const ingredientsId = useSelector(getIngredientsId);
 	const navigate = useNavigate();

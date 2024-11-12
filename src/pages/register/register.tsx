@@ -1,8 +1,6 @@
 import type { FC, FormEvent } from 'react';
-import type { TRootState } from '../../services/store';
 
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useDispatch, useSelector } from '../../services/store';
 import { useForm } from '../../hooks/useForm';
 
 import {
@@ -35,8 +33,8 @@ const links = [
 ];
 
 export const RegisterPage: FC = () => {
-	const dispatch = useAppDispatch();
-	const { isLoading } = useSelector((state: TRootState) => state.auth);
+	const dispatch = useDispatch();
+	const { isLoading } = useSelector((state) => state.auth);
 
 	const { values, handleChange } = useForm<IRegisterForm>({
 		name: '',
