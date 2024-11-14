@@ -11,7 +11,7 @@ export const ConstructorOrder: FC = () => {
 
 	return (
 		<>
-			<h4 className='text text_type_digits-large'>{orderData?.order.number}</h4>
+			<h4 className='text text_type_digits-large' data-testid='order-number'>{orderData?.order.number}</h4>
 			<p className='text text_type_main-medium mt-8'>идентификатор заказа</p>
 			<img className={`${styles.image} mt-15`} src={image} alt='иконка'></img>
 			<p className='text text_type_main-small mt-15'>

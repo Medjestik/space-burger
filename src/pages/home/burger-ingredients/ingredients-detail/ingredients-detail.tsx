@@ -39,7 +39,7 @@ export const IngredientDetail: FC<IIngredientDetailProps> = ({ title }) => {
 
 	return (
 		ingredient && (
-			<div className={styles.container}>
+			<div className={styles.container} data-testid='ingredient-detail'>
 				{title && (
 					<h2 className='text text_type_main-large mt-8 mb-8'>{title}</h2>
 				)}

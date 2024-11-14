@@ -47,6 +47,7 @@ export const ConstructorElementIngredient: FC<
 	return (
 		<li
 			className={`${styles.item} ${isDragging ? styles.item_dragging : ''}`}
+			data-testid='constructor-ingredient'
 			ref={(node) => dragRef(dropRef(node))}>
 			<DragIcon type='primary' />
 			<ConstructorElement

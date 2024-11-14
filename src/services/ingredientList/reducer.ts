@@ -1,12 +1,13 @@
 import type { IIngredient } from '../../pages/home/types';
+import type { IIngredientListStore } from './types';
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { getIngredientList } from './actions';
 
-const initialState = {
-	ingredientList: [] as IIngredient[],
+export const initialState: IIngredientListStore = {
+	ingredientList: [],
 	loading: true,
-	error: null as string | null,
+	error: null,
 };
 
 export const ingredientListSlice = createSlice({

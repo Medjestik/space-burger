@@ -11,9 +11,9 @@
 	position: relative;
 	background-color: var(--background-color);
 	border-radius: 16px;
-	transition: all .3s ease-in-out;
+	transition: all 0.3s ease-in-out;
 	&_dragging {
-		opacity: .2;
+		opacity: 0.2;
 	}
 }
 .card:hover {

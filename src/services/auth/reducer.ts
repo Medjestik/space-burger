@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import * as actions from './actions';
 
-const initialState: IAuthState = {
+export const initialState: IAuthState = {
 	user: null,
 	isAuthChecked: false,
 	isLoading: false,

@@ -11,9 +11,9 @@
 	border: none;
 	background: inherit;
 	outline: none;
-	transition: opacity .3s ease-in-out;
+	transition: opacity 0.3s ease-in-out;
 	&:hover {
-		opacity: .7;
+		opacity: 0.7;
 		cursor: pointer;
 	}
 	&_active {

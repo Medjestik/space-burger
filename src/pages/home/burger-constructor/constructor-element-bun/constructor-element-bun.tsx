@@ -11,15 +11,17 @@ export const ConstructorElementBun: FC<IConstructorElementBun> = ({
 	position,
 }) => {
 	return (
-		<ConstructorElement
-			text={`${bun.name} ${
-				position === EConstructorElementBunPosition.TOP ? ' (верх)' : ' (низ)'
-			}`}
-			price={bun.price}
-			thumbnail={bun.image}
-			type={position === EConstructorElementBunPosition.TOP ? 'top' : 'bottom'}
-			isLocked={true}
-			extraClass='ml-8'
-		/>
+		<div data-testid={position === EConstructorElementBunPosition.TOP ? `constructor-bun-top-${bun._id}` : `constructor-bun-bottom-${bun._id}`}>
+			<ConstructorElement
+				text={`${bun.name} ${
+					position === EConstructorElementBunPosition.TOP ? ' (верх)' : ' (низ)'
+				}`}
+				price={bun.price}
+				thumbnail={bun.image}
+				type={position === EConstructorElementBunPosition.TOP ? 'top' : 'bottom'}
+				isLocked={true}
+				extraClass='ml-8'
+			/>
+		</div>
 	);
 };
