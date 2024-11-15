@@ -4,7 +4,7 @@
 
 Приложение Space Burger. Индивидуальный проект от Яндекс практикума. Шестой спринт.
 
-Cсылка на проект - https://medjestik.github.io/space-burger/
+Cсылка на проект - https://medjestik.emiit.ru/
 
 ## Задачи
 

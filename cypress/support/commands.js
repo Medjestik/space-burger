@@ -35,3 +35,30 @@
 //     }
 //   }
 // }
+
+import { selectors } from './selectors';
+
+Cypress.Commands.add('dragIngredient', (index) => {
+	cy.get(selectors.ingredient).eq(index).trigger('dragstart');
+	cy.get(selectors.constructorContainer).trigger('drop');
+});
+
+Cypress.Commands.add('openModal', (index = 0) => {
+	cy.get(selectors.ingredient).eq(index).click();
+	cy.get(selectors.modal).should('exist');
+});
+
+Cypress.Commands.add('closeModalByButton', () => {
+	cy.get(selectors.modalCloseButton).click();
+	cy.get(selectors.modal).should('not.exist');
+});
+
+Cypress.Commands.add('closeModalByOverlay', () => {
+	cy.get(selectors.modalOverlay).click({ force: true });
+	cy.get(selectors.modal).should('not.exist');
+});
+
+Cypress.Commands.add('closeModalByEsc', () => {
+	cy.get('body').trigger('keydown', { key: 'Escape' });
+	cy.get(selectors.modal).should('not.exist');
+});
