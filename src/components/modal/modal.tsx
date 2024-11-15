@@ -28,7 +28,7 @@ export const Modal: FC<IModalProps> = ({
 	};
 
 	const modalContent = (
-		<div className={`${styles.modal} ${isOpen ? styles.modal_opened : ''}`}>
+		<div className={`${styles.modal} ${isOpen ? styles.modal_opened : ''}`} data-testid='modal'>
 			{isOpen && <ModalOverlay onClick={handleOverlayClick} />}
 			<div className={styles.container}>
 				<div className={`${styles.header} mb-4`}>
@@ -36,6 +36,7 @@ export const Modal: FC<IModalProps> = ({
 					<button
 						className={`${styles.close} ml-8`}
 						type='button'
+						data-testid='modal-close-button'
 						onClick={onClose}>
 						<CloseIcon type='primary' />
 					</button>

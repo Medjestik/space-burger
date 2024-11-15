@@ -3,7 +3,7 @@ import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { getOrderByNumber, createBurgerOrder } from './actions';
 
-const initialState: IBurgerOrderStore = {
+export const initialState: IBurgerOrderStore = {
 	orderData: null,
 	currentOrder: null,
 	loading: false,

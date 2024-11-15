@@ -35,6 +35,7 @@ export const IngredientsCard: FC<IIngredientCardProps> = ({ ingredient }) => {
 			className={styles.link}>
 			<li
 				className={`${styles.card} ${isDragging ? styles.card_dragging : ''}`}
+				data-testid='ingredient'
 				ref={dragRef}>
 				{countIngredient > 0 && (
 					<Counter count={countIngredient} size='default' />

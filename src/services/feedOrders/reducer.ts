@@ -5,7 +5,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { WebsocketStatus } from '../middleware/types';
 
-const initialState: IFeedOrdersStore = {
+export const initialState: IFeedOrdersStore = {
 	status: WebsocketStatus.OFFLINE,
 	ordersData: { orders: [], total: 0, totalToday: 0 },
 	connectionError: null,

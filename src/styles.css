@@ -2,11 +2,11 @@
 	--background-color: #131316;
 	--white-color: #ffffff;
 	--accent-color: #801ab3;
-	--gradient-color: #4C4CFF;
-	--interface-input: #2F2F37;
-	--secondary-text: #8585AD;
-	--interface-success: #00CCCC;
-	--interface-modal-bg: #1C1C21;
+	--gradient-color: #4c4cff;
+	--interface-input: #2f2f37;
+	--secondary-text: #8585ad;
+	--interface-success: #00cccc;
+	--interface-modal-bg: #1c1c21;
 	--interface-modal-edge: rgb(76 76 255 / 20%);
 	--interface-modal-border-radius: 40px;
 }
@@ -29,12 +29,12 @@ body {
 }
 
 .scroll {
-  scrollbar-width: thin;
+	scrollbar-width: thin;
 }
 
 .scroll::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+	width: 8px;
+	height: 8px;
 }
 
 .scroll::-webkit-scrollbar-button {
@@ -42,9 +42,9 @@ body {
 }
 
 .scroll::-webkit-scrollbar-track {
-  background: var(--interface-input);
+	background: var(--interface-input);
 }
 
 .scroll::-webkit-scrollbar-thumb {
-  background: var(--secondary-text);
+	background: var(--secondary-text);
 }

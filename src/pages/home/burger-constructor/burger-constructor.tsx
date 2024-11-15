@@ -116,7 +116,7 @@ export const BurgerConstructor: FC = () => {
 				<Preloader />
 			) : (
 				<>
-					<div className={styles.container} ref={dropTarget}>
+					<div className={styles.container} ref={dropTarget} data-testid='constructor-container'>
 						{bun ? (
 							<ConstructorElementBun
 								bun={bun}
@@ -162,6 +162,7 @@ export const BurgerConstructor: FC = () => {
 						<Button
 							onClick={handleCreateOrder}
 							htmlType='button'
+							data-testid='order-button'
 							type='primary'
 							size='large'
 							extraClass='ml-10'
